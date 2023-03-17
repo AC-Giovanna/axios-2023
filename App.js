@@ -33,6 +33,17 @@ const App = () => {
     }
   }, [clicou])
  
+  const Item = ({titulo, capa}) => {
+    return (
+      <View style={estilo.container}>
+        <Text>{titulo}</Text>
+        <Image source={{uri:capa}} 
+          style={{width:150, height:200, borderRadius:3, margin:30}} 
+        />
+      </View>
+    )
+  }
+
   return (
     <ScrollView>
     <View style={estilo.container}>
@@ -48,10 +59,12 @@ const App = () => {
         <Text style={estilo.textoBotao}>BUSCAR DADOS</Text>
       </TouchableOpacity>
 
-      <FlatList 
+      <FlatList
         data={texto.Search}
-        renderItem={({item})=><Text style={estilo.texto}>{item.Title}</Text>}
+        renderItem={({item})=><Item titulo={item.Title} capa={item.Poster} />}
+        keyExtractor={(item)=>item.imdbID}
       />
+
     </View>
     </ScrollView>
   )
